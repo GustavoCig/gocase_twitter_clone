@@ -13,3 +13,66 @@
  *= require_tree .
  *= require_self
  */
+
+body {
+    font-family: 'Bitstream Vera Sans', Verdana, Tahoma, 'Sans serif';
+    font-size: 12px;
+    margin: 0;
+    padding: 0;
+    background: #f8f7f3;
+    height: auto;
+    min-height: 100%;
+    position: relative;
+}
+
+.flex-container {
+    display: flex;
+}
+
+.flex-item-main {
+    flex-grow: 3;
+}
+
+.flex-item-secondary {
+    flex-grow: 2;
+}
+
+.flex-item-tertiary {
+    flex-grow: 1;
+}
+
+ .main {
+    justify-content: space-between;
+ }
+
+ .center {
+    justify-content: center
+ }
+
+ .left {
+    align-items: left;
+ }
+
+ .right {
+    align-items: right;
+ }
+
+#profile {
+    background-color: yellow;
+}
+
+#timeline {
+    background-color: red;
+}
+
+#options {
+    background-color: blue;
+}
+
+header {
+    background-color: grey;
+}
+
+footer {
+    background-color: green;
+}
