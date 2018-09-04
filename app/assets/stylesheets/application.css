@@ -19,10 +19,30 @@ body {
     font-size: 12px;
     margin: 0;
     padding: 0;
-    background: #f8f7f3;
+    background: #bad6da;
     height: auto;
     min-height: 100%;
     position: relative;
+}
+
+header {
+    background-color: grey;
+}
+
+footer {
+    background-color: green;
+}
+
+#profile {
+    background-color: yellow;
+}
+
+#timeline {
+    background-color: red;
+}
+
+#options {
+    background-color: blue;
 }
 
 .flex-container {
@@ -57,22 +77,8 @@ body {
     align-items: right;
  }
 
-#profile {
-    background-color: yellow;
-}
-
-#timeline {
-    background-color: red;
-}
-
-#options {
-    background-color: blue;
-}
-
-header {
-    background-color: grey;
-}
-
-footer {
-    background-color: green;
-}
+ .forms {
+    background-color: whitesmoke;
+    padding: 5px;
+    width: 300px;
+ }

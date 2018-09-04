@@ -1,8 +1,14 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, :controllers => {:registrations => "user"}
   devise_scope :user do
     get '/logout/' => 'devise/sessions#destroy'
+
+    unauthenticated do
+      root :to => 'devise/sessions#create'
+    end
+
+    authenticated do
+      root :to => 'user#index'
+    end
   end
-  root to: 'user#index'
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
