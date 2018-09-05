@@ -5,6 +5,12 @@
 
 
   <div class="field">
+    <%= f.label :avatar %>
+    <%= image_tag(url_for(current_user.avatar)) %>
+    <%= f.file_field :avatar %>
+  </div>
+
+  <div class="field">
     <%= f.label :name %><br />
     <%= f.text_field :name, autofocus: true %>
   </div>

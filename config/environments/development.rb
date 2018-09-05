@@ -62,5 +62,5 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: 'localhost', port: 8282 }
 
   # Active Storage service configuration
-  config.active_Storage.service = :local
+  config.active_storage.service = :local
 end
