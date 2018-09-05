@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
     authenticated do
       root :to => 'user#index'
+      get '/edit/' => 'user#edit', :as => 'edit_custom'
     end
   end
 end
