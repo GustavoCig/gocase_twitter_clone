@@ -26,23 +26,23 @@ body {
 }
 
 header {
-    background-color: grey;
+    background-color: #d0d0d0;
 }
 
 footer {
-    background-color: green;
+    background-color: #9bec9b;
 }
 
 #profile {
-    background-color: yellow;
+    background-color: #eaea90;
 }
 
 #timeline {
-    background-color: red;
+    background-color: #e89292;
 }
 
 #options {
-    background-color: blue;
+    background-color: #a1a1d8;
 }
 
 .flex-container {

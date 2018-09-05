@@ -2,6 +2,7 @@ class UserController < Devise::RegistrationsController
   before_action :configure_params, only: [:create, :update, :edit]
 
   def index
+    @user = current_user
   end
 
   def new
