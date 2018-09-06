@@ -6,7 +6,9 @@
 
   <div class="field">
     <%= f.label :avatar %>
-    <%= image_tag(url_for(current_user.avatar)) %>
+    <% if current_user.avatar.attached? %>
+          <%= image_tag current_user.avatar %>
+    <% end %>
     <%= f.file_field :avatar %>
   </div>
 
@@ -52,4 +54,4 @@
 
 <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
 
-<%= link_to "Back", :back %>
+<%= link_to "Back", :root %>

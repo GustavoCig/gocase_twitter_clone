@@ -22,7 +22,8 @@ class UserController < Devise::RegistrationsController
   # PUT /resource
    def update
      super
-     current_user.avatar.attach(params[:user][:avatar])
+     puts "teste-------------------"
+     puts params[:user][:avatar]
    end
 
   # DELETE /resource
