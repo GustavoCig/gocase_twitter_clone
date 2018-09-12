@@ -8,16 +8,16 @@ class RelationTest < ActiveSupport::TestCase
     user_4 = User.find(4)
     user_5 = User.find(5)
 
-    _4_follow_3 = Relation.create(follower: user_4, followed: user_3)
-    _3_follow_4 = Relation.create(follower: user_3, followed: user_4)
-    _1_follow_5 = Relation.create(follower: user_1, followed: user_5)
-    _1_follow_2 = Relation.create(follower: user_1, followed: user_2)
-    _1_follow_4 = Relation.create(follower: user_1, followed: user_4)
-    _5_follow_1 = Relation.create(follower: user_5, followed: user_1)
-    _5_follow_2 = Relation.create(follower: user_5, followed: user_2)
-    _5_follow_3 = Relation.create(follower: user_5, followed: user_3)
-    _3_follow_1 = Relation.create(follower: user_3, followed: user_1)
-    _3_follow_2 = Relation.create(follower: user_3, followed: user_2)
+    user_4.follow(user_3)
+    user_3.follow(user_4)
+    user_1.follow(user_5)
+    user_1.follow(user_2)
+    user_1.follow(user_4)
+    user_5.follow(user_1)
+    user_5.follow(user_2)
+    user_5.follow(user_3)
+    user_3.follow(user_1)
+    user_3.follow(user_2)
 
     assert user_3.followers.include?(user_4)
     assert user_4.followed_users.include?(user_3)
@@ -48,5 +48,44 @@ class RelationTest < ActiveSupport::TestCase
 
     assert user_2.followers.include?(user_3)
     assert user_3.followed_users.include?(user_2)
+  end
+
+  test "if user can't follow itself" do
+  end
+
+  test "if two users can't have more than one of the same relation between themselves" do
+    user_1 = User.find(1)
+    user_2 = User.find(2)
+    user_3 = User.find(3)
+
+    user_1.follow(user_2)
+    user_1.follow(user_3)
+    user_2.follow(user_3)
+    user_2.follow(user_1)
+    user_3.follow(user_1)
+    user_3.follow(user_2)
+
+    _1_follow_2_repeat = Relation.create(follower: user_1, followed: user_2)
+    _1_follow_3_repeat = Relation.create(follower: user_1, followed: user_3)
+    _2_follow_3_repeat = Relation.create(follower: user_2, followed: user_3)
+    _2_follow_1_repeat = Relation.create(follower: user_2, followed: user_1)
+    _3_follow_1_repeat = Relation.create(follower: user_3, followed: user_1)
+    _3_follow_2_repeat = Relation.create(follower: user_3, followed: user_2)
+
+    assert_not _1_follow_2_repeat.save
+    assert_not _1_follow_3_repeat.save
+    assert_not _2_follow_3_repeat.save
+    assert_not _2_follow_1_repeat.save
+    assert_not _3_follow_1_repeat.save
+    assert_not _3_follow_2_repeat.save
+  end
+
+  test "if there can't be a relation involving invalid users" do
+    user_1 = User.first
+    invalid_user = User.new()
+    invalid_email = "invalid_email"
+
+    assert_not user_1.follow_by_email(invalid_email)
+    assert_not user_1.follow(invalid_user)
   end
 end
