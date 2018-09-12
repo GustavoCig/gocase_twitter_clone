@@ -24,30 +24,16 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
 
-  def follow(user)
-    if (( user.is_a? User ) && ( user.valid? ))
-      return followed_users << user
-    end
-    return false
-  end
-
-  def follow_u(username)
+  def follow(username)
     if User.exists? username: username
       return followed_users << User.find_by(username: username)
     end
     return false
   end
 
-  def unfollow(user)
-    if (( user.is_a? User ) && ( followed_users.includes? user ))
-      return followed_users.destroy(user)
-    end
-    return false
-  end
-
-  def unfollow_u(user_email)
-    if User.exists? email: user_email
-      return followed_users.destroy(email: user_email)
+  def unfollow(username)
+    if (( User.exists? username: username ) && ( followed_users.include? username: username ))
+      return followed_users.destroy(username: username)
     end
     return false
   end

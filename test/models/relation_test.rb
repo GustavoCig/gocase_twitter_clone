@@ -8,16 +8,16 @@ class RelationTest < ActiveSupport::TestCase
     user_4 = User.find(4)
     user_5 = User.find(5)
 
-    user_4.follow(user_3)
-    user_3.follow(user_4)
-    user_1.follow(user_5)
-    user_1.follow(user_2)
-    user_1.follow(user_4)
-    user_5.follow(user_1)
-    user_5.follow(user_2)
-    user_5.follow(user_3)
-    user_3.follow(user_1)
-    user_3.follow(user_2)
+    user_4.follow(user_3.username)
+    user_3.follow(user_4.username)
+    user_1.follow(user_5.username)
+    user_1.follow(user_2.username)
+    user_1.follow(user_4.username)
+    user_5.follow(user_1.username)
+    user_5.follow(user_2.username)
+    user_5.follow(user_3.username)
+    user_3.follow(user_1.username)
+    user_3.follow(user_2.username)
 
     assert user_3.followers.include?(user_4)
     assert user_4.followed_users.include?(user_3)
@@ -58,12 +58,12 @@ class RelationTest < ActiveSupport::TestCase
     user_2 = User.find(2)
     user_3 = User.find(3)
 
-    user_1.follow(user_2)
-    user_1.follow(user_3)
-    user_2.follow(user_3)
-    user_2.follow(user_1)
-    user_3.follow(user_1)
-    user_3.follow(user_2)
+    user_1.follow(user_2.username)
+    user_1.follow(user_3.username)
+    user_2.follow(user_3.username)
+    user_2.follow(user_1.username)
+    user_3.follow(user_1.username)
+    user_3.follow(user_2.username)
 
     _1_follow_2_repeat = Relation.create(follower: user_1, followed: user_2)
     _1_follow_3_repeat = Relation.create(follower: user_1, followed: user_3)
@@ -82,12 +82,11 @@ class RelationTest < ActiveSupport::TestCase
 
   test "if there can't be a relation involving invalid users" do
     user_1 = User.first
-    invalid_user = User.new()
-    invalid_object = 42
     invalid_username = "invalid_username"
+    assert_not user_1.follow(invalid_username)
+  end
 
-    assert_not user_1.follow(invalid_user)
-    assert_not user_1.follow(invalid_object)
-    assert_not user_1.follow_u(invalid_username)
+  test "if the unfollow methods are working" do
+
   end
 end

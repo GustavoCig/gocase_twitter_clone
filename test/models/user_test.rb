@@ -12,16 +12,10 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "if destroying a user destroy their follows as well" do
-    user_1 = User.find(1)
-    user_2 = User.find(2)
-    user_3 = User.find(3)
-
-    _1_follow_2 = Relation.create(follower: user_1, followed: user_2)
-    _1_follow_3 = Relation.create(follower: user_1, followed: user_3)
-    _2_follow_3 = Relation.create(follower: user_2, followed: user_3)
-    _2_follow_1 = Relation.create(follower: user_2, followed: user_1)
-    _3_follow_1 = Relation.create(follower: user_3, followed: user_1)
-    _3_follow_2 = Relation.create(follower: user_3, followed: user_2)
+    # first_id = User.first.id
+    # User.destroy(first_id)
+    # assert_not Relation.find(first_id)
+    # assert_not Relation.find_by(followed_id: first_id)
   end
 
 end
