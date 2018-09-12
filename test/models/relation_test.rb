@@ -83,9 +83,11 @@ class RelationTest < ActiveSupport::TestCase
   test "if there can't be a relation involving invalid users" do
     user_1 = User.first
     invalid_user = User.new()
-    invalid_email = "invalid_email"
+    invalid_object = 42
+    invalid_username = "invalid_username"
 
-    assert_not user_1.follow_by_email(invalid_email)
     assert_not user_1.follow(invalid_user)
+    assert_not user_1.follow(invalid_object)
+    assert_not user_1.follow_u(invalid_username)
   end
 end

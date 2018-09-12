@@ -15,37 +15,38 @@ class User < ApplicationRecord
                                dependent: :destroy
   has_many :followers, through: :passive_relations, source: :follower
 
-  validates :id, :email, uniqueness: true
-  validates :id, :email, :name, :created_at, :updated_at, presence: true
+  validates :id, :username, :email, uniqueness: true
+  validates :id, :username, :email, :name, :created_at, :updated_at, presence: true
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+
   def follow(user)
-    if User.exists?(email: user.email)
-      followed_users << user
+    if (( user.is_a? User ) && ( user.valid? ))
+      return followed_users << user
     end
     return false
   end
 
-  def follow_by_email(user_email)
-    if User.exists?(email: user_email)
-      return followed_users << User.find_by(email: user_email)
+  def follow_u(username)
+    if User.exists? username: username
+      return followed_users << User.find_by(username: username)
     end
     return false
   end
 
   def unfollow(user)
-    if User.exists?(email: user.email)
+    if (( user.is_a? User ) && ( followed_users.includes? user ))
       return followed_users.destroy(user)
     end
     return false
   end
 
-  def unfollow_by_email(user_email)
-    if User.exists?(email: user_email)
+  def unfollow_u(user_email)
+    if User.exists? email: user_email
       return followed_users.destroy(email: user_email)
     end
     return false
