@@ -1,0 +1,6 @@
+      invoke  active_record
+      create    db/migrate/20180910144713_create_followings.rb
+      create    app/models/following.rb
+      invoke    test_unit
+      create      test/models/following_test.rb
+      create      test/fixtures/followings.yml
