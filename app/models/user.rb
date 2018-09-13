@@ -1,10 +1,14 @@
 class User < ApplicationRecord
   has_one_attached :avatar
   has_many_attached :media
-  has_many :tweets
-  has_many :mentions
+  has_many :mentions, dependent: :destroy
+  has_many :tweets, dependent: :destroy
 
-  #TODO #3: Use a regex to restrict the characters in a Users's username, name and email
+  # TODO: 
+  # Use a regex to restrict the characters in a Users's username, name and email
+  # 
+  # Define if interface is going to use username or the user itself
+
 
   # Defines the 'virtual' 'active' relation where the users with 'follower_id' are following somebody else
   has_many :active_relations, foreign_key: "follower_id",
@@ -45,4 +49,3 @@ class User < ApplicationRecord
     Tweet.create(user: self, message: message)
   end
 end
- 
