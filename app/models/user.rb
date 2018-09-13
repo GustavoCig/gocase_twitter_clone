@@ -32,8 +32,8 @@ class User < ApplicationRecord
   end
 
   def unfollow(username)
-    if (( User.exists? username: username ) && ( followed_users.include? username: username ))
-      return followed_users.destroy(username: username)
+    if (( User.exists? username: username ) && ( followed_users.any?{|row| row.username == username} ))
+      return followed_users.destroy(User.find_by(username: username).id)
     end
     return false
   end

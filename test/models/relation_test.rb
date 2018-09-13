@@ -87,6 +87,25 @@ class RelationTest < ActiveSupport::TestCase
   end
 
   test "if the unfollow methods are working" do
+    user_1 = User.find(1)
+    user_2 = User.find(2)
+    user_3 = User.find(3)
 
+    user_1.follow(user_2.username)
+    user_2.follow(user_3.username)
+    user_3.follow(user_1.username)
+
+    assert user_1.followed_users.include? user_2
+    assert user_2.followed_users.include? user_3
+    assert user_3.followed_users.include? user_1
+
+    user_1.unfollow(user_2.username)
+    user_2.unfollow(user_3.username)
+    user_3.unfollow(user_1.username)
+
+    assert_not user_1.followed_users.include? user_2
+    assert_not user_2.followed_users.include? user_3
+    assert_not user_3.followed_users.include? user_1
   end
+
 end
