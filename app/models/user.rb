@@ -2,6 +2,9 @@ class User < ApplicationRecord
   has_one_attached :avatar
   has_many_attached :media
   has_many :tweets
+  has_many :mentions
+
+  #TODO #3: Use a regex to restrict the characters in a Users's username, name and email
 
   # Defines the 'virtual' 'active' relation where the users with 'follower_id' are following somebody else
   has_many :active_relations, foreign_key: "follower_id",
@@ -15,8 +18,8 @@ class User < ApplicationRecord
                                dependent: :destroy
   has_many :followers, through: :passive_relations, source: :follower
 
-  validates :id, :username, :email, uniqueness: true
-  validates :id, :username, :email, :name, :created_at, :updated_at, presence: true
+  validates :username, :email, uniqueness: true
+  validates :username, :email, :name, presence: true
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -38,4 +41,8 @@ class User < ApplicationRecord
     return false
   end
 
+  def create_tweet(message)
+    Tweet.create(user: self, message: message)
+  end
 end
+ 
