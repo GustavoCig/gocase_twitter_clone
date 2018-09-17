@@ -1,6 +1,8 @@
 require 'test_helper'
 
 class RelationTest < ActiveSupport::TestCase
+  # TODO:
+  # Improve tests for relations
   test 'if the follow relations are working properly' do
     user_1 = User.find(1)
     user_2 = User.find(2)

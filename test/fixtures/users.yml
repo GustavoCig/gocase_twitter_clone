@@ -6,7 +6,7 @@
 #
 one:
   id: 1
-  username: "1"
+  username: "trump1"
   email: "teste@teste"
   encrypted_password: "123456"
   name: "1"
@@ -15,7 +15,7 @@ one:
 
 two:
   id: 2
-  username: "2"
+  username: "trump2"
   email: "teste2@teste"
   encrypted_password: "123456"
   name: "2"
@@ -24,7 +24,7 @@ two:
 
 three:
   id: 3
-  username: "3"
+  username: "trump3"
   email: "teste3@teste"
   encrypted_password: "123456"
   name: "3"
@@ -33,7 +33,7 @@ three:
 
 four:
   id: 4
-  username: "4"
+  username: "trump4"
   email: "teste4@teste"
   encrypted_password: "123456"
   name: "4"
@@ -42,7 +42,7 @@ four:
 
 five:
   id: 5
-  username: "5"
+  username: "trump5"
   email: "teste5@teste"
   encrypted_password: "123456"
   name: "5"
