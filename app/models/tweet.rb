@@ -5,6 +5,7 @@ class Tweet < ApplicationRecord
   
   validates :message, length: { in: 1..120 }
   validates :user, :message, presence: true
+  validates_with UserShouldExistValidator
 
   after_save :filter_regex
 

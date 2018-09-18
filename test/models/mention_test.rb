@@ -1,50 +1,38 @@
 require 'test_helper'
 
 class MentionTest < ActiveSupport::TestCase
-  test "mentioning somebody should generate a mention in the database" do
-    user_1 = User.first
-    user_2 = User.find(2)
-    username_1 = "@" + user_1.username
-    user_2.create_tweet("hey my friend," + username_1 + ", nice to meet you")
-    mention_of_user_1 = Mention.find_by(user: user_1)
-    assert mention_of_user_1.errors.empty?
-    assert_equal mention_of_user_1.tweet_id, Tweet.find_by(user: user_2).id
-  end
+  test "mention with invalid/null parameters shouldn't be stored in the database" do
+    invalid_user_id = User.last.id + 1
+    invalid_user = User.new()
+    invalid_tweet_id = Tweet.last.id + 1
+    invalid_tweet = Tweet.new()
 
-  test "incorrect syntax in a mention shouldn't generate a mention in the database" do
-    user_1 = User.first
-    user_2 = User.find(2)
-    username_1_with_exclamation = "@!" + user_1.username
-    username_1_with_comma = "@," + user_1.username
-    username_1_with_period = "@." + user_1.username
-    username_1_with_interrogation = "@?" + user_1.username
-    username_1_with_colon = "@:" + user_1.username
+    invalid_user_id_mention = Mention.new(user_id: invalid_user_id, tweet: Tweet.first)
+    invalid_user_mention = Mention.new(user: invalid_user, tweet: Tweet.first)
+    invalid_tweet_id_mention = Mention.new(user: User.first, tweet_id: invalid_tweet_id)
+    invalid_tweet_mention = Mention.new(user: User.first, tweet: invalid_tweet)
 
-    tweet_exclamation = user_2.create_tweet("hey my friend, " + username_1_with_exclamation + " nice to meet you")
-    tweet_comma = user_2.create_tweet("hey my friend, " + username_1_with_comma + " nice to meet you")
-    tweet_period = user_2.create_tweet("hey my friend, " + username_1_with_period + " nice to meet you")
-    tweet_interrogation = user_2.create_tweet("hey my friend, " + username_1_with_interrogation + " nice to meet you")
-    tweet_colon = user_2.create_tweet("hey my friend, " + username_1_with_colon + " nice to meet you")
-
-    assert tweet_exclamation.mentions.empty?
-    assert tweet_comma.mentions.empty?
-    assert tweet_period.mentions.empty?
-    assert tweet_interrogation.mentions.empty?
-    assert tweet_colon.mentions.empty?
+    assert_not invalid_user_id_mention.valid?
+    assert_not invalid_user_mention.valid?
+    assert_not invalid_tweet_id_mention.valid?
+    assert_not invalid_tweet_mention.valid?
   end
 
   test "user self mentioning shouldn't generate a mention" do
     user_1 = User.first
-    username_1 = "@" + user_1.username
-    self_tweet = user_1.create_tweet("I am self mentioning like a dumbass " + username_1)
-    assert_nil Mention.find_by(tweet: self_tweet)
+    tweet_1 = Tweet.create(user: user_1, message: "self mentioning tweet")
+    self_mention = Mention.new(user: user_1, tweet: tweet_1)
+
+    assert_not self_mention.valid?
   end
 
-  test "many equal mentions in a single tweet shouldn't generate more than one mention in the database" do
+  test "there shouldn't be more than one unique pair of tweet and user in the database" do
     user_1 = User.first
     user_2 = User.find(2)
-    username_2 = "@" + user_2.username
-    user_1.create_tweet("Hey " + username_2 + " " + username_2 + " " + username_2)
-    assert_equal 1, Mention.where(user: user_2).count
+    tweet_to_be_repeated = Tweet.create(user: user_1, message: "initial pair of tweet/user")
+    Mention.create(user: user_2, tweet: tweet_to_be_repeated)
+    repeated_mention = Mention.new(user: user_2, tweet: tweet_to_be_repeated)
+
+    assert_not repeated_mention.valid?
   end
 end
