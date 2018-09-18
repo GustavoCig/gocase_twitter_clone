@@ -185,4 +185,13 @@ class UserTest < ActiveSupport::TestCase
     assert_not user_2.followed_users.include? user_3
     assert_not user_3.followed_users.include? user_1
   end
+
+  test "user liking a tweet should create a Like in the database and increment number_of_likes of said tweet" do
+    user_1 = User.first
+    tweet_to_be_liked = Tweet.first
+    created_like = user_1.like(tweet_to_be_liked.id)
+
+    assert Like.exists?(created_like.id)
+    assert_equal 1, Tweet.find(tweet_to_be_liked.id).number_of_likes
+  end
 end

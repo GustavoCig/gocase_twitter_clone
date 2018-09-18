@@ -51,4 +51,8 @@ class User < ApplicationRecord
   def create_tweet(message)
     Tweet.create(user: self, message: message)
   end
+
+  def like(tweet_id)
+    Like.create(user: self, tweet_id: tweet_id)
+  end
 end

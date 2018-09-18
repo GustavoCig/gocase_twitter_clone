@@ -2,6 +2,7 @@ class Tweet < ApplicationRecord
   belongs_to :user
   has_many_attached :media
   has_many :mentions, dependent: :destroy
+  has_many :likes, dependent: :destroy
   
   validates :message, length: { in: 1..120 }
   validates :user, :message, presence: true
@@ -26,5 +27,4 @@ class Tweet < ApplicationRecord
   def create_mention(user)
     Mention.create(user: user, tweet: self)
   end
-
 end

@@ -10,11 +10,11 @@ class TweetTest < ActiveSupport::TestCase
   test "invalid or null user tweets shouldn't be allowed" do
     invalid_user = User.new()
     invalid_user_id = User.last.id + 1
-    empty_user_message = Tweet.new(message: "teste")
+    empty_user_tweet = Tweet.new(message: "teste")
     invalid_user_tweet = Tweet.new(user: invalid_user, message: "teste usuario invalido")
     invalid_user_id_tweet = Tweet.new(user_id: invalid_user_id, message: "teste id de usuario invalido")
 
-    assert_not empty_user_message.valid?
+    assert_not empty_user_tweet.valid?
     assert_not invalid_user_tweet.valid?
     assert_not invalid_user_id_tweet.valid?
   end
@@ -51,6 +51,11 @@ class TweetTest < ActiveSupport::TestCase
     assert tweet_period.mentions.empty?
     assert tweet_interrogation.mentions.empty?
     assert tweet_colon.mentions.empty?
+  end
+
+  test "creating a tweet without defining a number_of_likes should default to 0" do
+    _0_likes_tweet = Tweet.new(user: User.first, message: "this tweet should have 0 likes")
+    assert_equal _0_likes_tweet.number_of_likes, 0
   end
 
 end
