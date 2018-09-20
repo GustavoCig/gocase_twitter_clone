@@ -1,32 +1,25 @@
 <body>
-    <header class="flex-container flex-item-main center">
-        <div>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    <%= render 'shared/header' %>
+    <div class='flex-container main borders'>
+        <div id='profile' class='flex-item-tertiary borders'>
+          <h2>Profile</h2>
+          <%= render 'shared/profile_desc', passed_user: current_user %>
+          <div class='profile-info borders'>
+            <%= link_to 'Edit profile', edit_custom_path %>
+          </div>
         </div>
-        <div>
-            <%= link_to 'Logout', logout_path %>
-        </div>
-    </header>
-    <div class="flex-container main">
-        <div id="profile" class="flex-item-tertiary">
-            <div class="profile-description">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </div>
-            <div class="profile-info">
-                <%= link_to 'Edit profile', edit_custom_path %>
-            </div>
-        </div>
-        <div id="timeline" class="flex-item-main">
+        <div id='timeline' class='flex-item-main borders'>
             <h2>Timeline</h2>
-            <h3>Post a tweet</h3>
-              
+            <h3>Create tweet</h3>
+            <%= render partial: 'shared/tweets', collection: @tweets, as: :tweet %>
         </div>
-        <div id="options" class="flex-item-tertiary">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        <div id='options' class='flex-item-tertiary borders'>
+          <h2>People you might like</h2>
+          <%= render partial: 'shared/profile_desc', collection: @followed_users, as: :passed_user %>
         </div>
     </div>
-    <footer class="flex-container flex-item-main center">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    <footer class='flex-container flex-item-main center borders'>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
     </footer>
 </body>
 </html>

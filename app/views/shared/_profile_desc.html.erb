@@ -1,0 +1,12 @@
+<div class='profile-description borders'>
+  <li> 
+    <% if passed_user.avatar.nil? %>
+      <%= image_tag passed_user.avatar %> 
+    <% else %>
+      <%= image_tag 'picture_min.png' %>
+    <% end %>
+  </li>
+  <li>Name: <%= passed_user.name %></li>
+  <li>Email: <%= passed_user.email %></li>
+  <li>Username: <%= passed_user.username %></li>
+</div>

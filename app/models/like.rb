@@ -4,7 +4,7 @@ class Like < ApplicationRecord
 
   validates :user, :tweet, presence: true
   validates :user, uniqueness: { scope: :tweet,
-    message: "User can't like the same tweet more than once" }
+    message: 'User can`t like the same tweet more than once' }
   validates_with UserShouldExistValidator
   validates_with TweetValidator
 end

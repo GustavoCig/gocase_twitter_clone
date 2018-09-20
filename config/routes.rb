@@ -9,7 +9,7 @@ Rails.application.routes.draw do
       root :to => 'user#index'
       get '/edit/' => 'user#edit', as: :edit_custom
       get '/logout/' => 'devise/sessions#destroy', as: :logout
-
+      get '/tweet/:id/like' => 'tweet#like',  as: :tweet_like
     end
   end
 end

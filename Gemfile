@@ -62,3 +62,5 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 # Authentication gem
 gem 'devise'
+# JQuery gem
+gem 'jquery-rails'

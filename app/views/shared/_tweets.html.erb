@@ -1,0 +1,17 @@
+<div class='tweet'>
+  <table>
+    <tr>
+      <td>ID: <%= tweet.id %></td>
+    </tr>
+    <tr>
+      <td>User:<%= tweet.user.username %></td>
+    </tr>
+    <tr>
+      <td><%= tweet.message %></td>
+    </tr>
+    <tr>
+      <td>Likes: <%= tweet.number_of_likes %></td>
+    </tr>
+  </table>
+  <%= like_button tweet %>
+</div>

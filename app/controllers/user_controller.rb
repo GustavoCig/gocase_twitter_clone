@@ -3,6 +3,11 @@ class UserController < Devise::RegistrationsController
 
   def index
     @user = current_user
+    @tweets = Tweet.includes(:user)
+                .where(['(user_id = ?) or (user_id IN (?))', current_user.id, current_user.followed_users.ids])
+                .limit 10
+    @followed_users = User.includes(:followed_users)
+                        .where id: current_user.followed_users.ids
   end
 
   def new
@@ -22,7 +27,6 @@ class UserController < Devise::RegistrationsController
   # PUT /resource
    def update
      super
-     puts "teste-------------------"
      puts params[:user][:avatar]
    end
 
@@ -44,7 +48,7 @@ class UserController < Devise::RegistrationsController
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_params
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :email, :password, :password_confirmation])
-    devise_parameter_sanitizer.permit(:account_update, keys: [:avatar, :name, :email, :password, :password_confirmation])
+    devise_parameter_sanitizer.permit :sign_up, keys: [:name, :username, :email, :password, :password_confirmation]
+    devise_parameter_sanitizer.permit :account_update, keys: [:avatar, :name, :email, :password, :password_confirmation]
   end
 end

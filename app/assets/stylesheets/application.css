@@ -26,23 +26,27 @@ body {
 }
 
 header {
-    background-color: #d0d0d0;
+    /*background-color: #d0d0d0;*/
 }
 
 footer {
-    background-color: #9bec9b;
+    /*background-color: #9bec9b;*/
+}
+
+li {
+  padding: 5px;
 }
 
 #profile {
-    background-color: #eaea90;
+    /*background-color: #eaea90;*/
 }
 
 #timeline {
-    background-color: #e89292;
+    /*background-color: #e89292;*/
 }
 
 #options {
-    background-color: #a1a1d8;
+    /*background-color: #a1a1d8;*/
 }
 
 .flex-container {
@@ -82,3 +86,11 @@ footer {
     padding: 5px;
     width: 300px;
  }
+
+ .borders {
+  border: solid 0.5px black;
+}
+
+.tweet {
+  padding-top: 10px;
+}
