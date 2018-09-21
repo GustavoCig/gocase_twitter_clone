@@ -6,7 +6,9 @@
       <%= image_tag 'picture_min.png' %>
     <% end %>
   </li>
+  <li>ID: <%= passed_user.id %></li>
   <li>Name: <%= passed_user.name %></li>
   <li>Email: <%= passed_user.email %></li>
   <li>Username: <%= passed_user.username %></li>
+  <%= follow_link passed_user  %>
 </div>

@@ -57,5 +57,4 @@ class TweetTest < ActiveSupport::TestCase
     _0_likes_tweet = Tweet.new(user: User.first, message: "this tweet should have 0 likes")
     assert_equal _0_likes_tweet.number_of_likes, 0
   end
-
 end

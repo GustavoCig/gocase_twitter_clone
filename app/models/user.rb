@@ -36,7 +36,10 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  
+  def follows? user
+    return !Relation.where(follower: self, followed: user).empty?
+  end
+
   def follow username
     if User.exists? username: username
       return Relation.create follower: self, followed: User.find_by(username: username)   
@@ -56,7 +59,7 @@ class User < ApplicationRecord
   end
 
   def liked? tweet
-    return Like.where(user: self, tweet: tweet).any?
+    return !Like.where(user: self, tweet: tweet).empty?
   end
 
   def like tweet
@@ -68,7 +71,7 @@ class User < ApplicationRecord
 
   def dislike tweet
     if liked? tweet
-      return Like.destroy Like.where(user: self, tweet: tweet).first.id
+      return tweet.likes.where(user: self).first.destroy
     end
     return false
   end

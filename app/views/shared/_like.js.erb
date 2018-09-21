@@ -1,1 +1,2 @@
 $('#like-<%= @tweet.id %>').replaceWith('<%= like_button @tweet %>');
+$('#tweet-likes-<%= @tweet.id %>').replaceWith('<td id="tweet-likes-<%= @tweet.id %>">Likes: <%= @tweet.number_of_likes %></td>');

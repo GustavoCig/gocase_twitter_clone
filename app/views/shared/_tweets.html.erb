@@ -10,7 +10,7 @@
       <td><%= tweet.message %></td>
     </tr>
     <tr>
-      <td>Likes: <%= tweet.number_of_likes %></td>
+      <td id='tweet-likes-<%= tweet.id %>'>Likes: <%= tweet.number_of_likes %></td>
     </tr>
   </table>
   <%= like_button tweet %>
