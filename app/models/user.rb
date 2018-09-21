@@ -45,7 +45,7 @@ class User < ApplicationRecord
   end
 
   def unfollow username
-    if User.exists? username: username  &&  followed_users.any?{ |row| row.username == username }
+    if (User.exists? username: username)  &&  (followed_users.any?{ |user| user.username == username })
       return followed_users.destroy User.find_by(username: username).id
     end
     return false
@@ -67,7 +67,7 @@ class User < ApplicationRecord
   end
 
   def dislike tweet
-    if liked?(tweet)
+    if liked? tweet
       return Like.destroy Like.where(user: self, tweet: tweet).first.id
     end
     return false

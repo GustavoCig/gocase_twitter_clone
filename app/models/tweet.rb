@@ -15,16 +15,16 @@ class Tweet < ApplicationRecord
 
   private
 
-  def filter_regex()
+  def filter_regex
     matches = message.scan(MENTIONS_REGEX).uniq
     matches.each do |user|
-      user_clean = USER_REGEX.match(user)
-      matched_user = User.find_by(username: user_clean.to_s)
-      create_mention(matched_user)   
+      user_clean = USER_REGEX.match user
+      matched_user = User.find_by username: user_clean.to_s
+      create_mention matched_user   
     end
   end
 
-  def create_mention(user)
-    Mention.create(user: user, tweet: self)
+  def create_mention user
+    Mention.create user: user, tweet: self
   end
 end

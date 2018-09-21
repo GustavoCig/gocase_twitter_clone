@@ -4,6 +4,6 @@ class Relation < ApplicationRecord
 
   validates :follower_id, :followed_id, presence: true
   validates :follower_id, uniqueness: { scope: :followed_id,
-    message: 'There can`t be more than one of the same relation' }
+              message: 'There can`t be more than one of the same relation' }
   validates_with UserSelfFollowValidator
 end
