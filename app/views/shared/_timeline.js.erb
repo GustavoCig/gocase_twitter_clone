@@ -1,2 +1,5 @@
+// Placing the #renderable_timeline div inside the partial causes a problem where every single tweet is surrounded by this div
+// Thus whenever the replace event is triggered it ends up substituting one of the tweets with this render,
+// instead of replacing the entire timeline
 $('#renderable_timeline')
   .replaceWith('<div id="renderable_timeline"><%= j render partial: "shared/tweets", collection: @tweets_reload, as: :tweet %> </div>');

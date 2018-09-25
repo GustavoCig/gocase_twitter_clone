@@ -5,7 +5,6 @@ class UserController < Devise::RegistrationsController
     @user = current_user
     @tweets = Tweet.includes(:user)
                 .where(['(user_id = ?) or (user_id IN (?))', current_user.id, current_user.followed_users.ids])
-                .limit 10
     # @followed_users = User.includes(:followed_users)
     #                     .where id: current_user.followed_users.ids
     @followed_users = User.all

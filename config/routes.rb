@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'relation/follow'
   devise_for :users, :controllers => {:registrations => "user"}
   devise_scope :user do
     unauthenticated do
@@ -8,11 +7,14 @@ Rails.application.routes.draw do
 
     authenticated do
       root :to => 'user#index'
+
+      resource :tweets
       get '/edit/' => 'user#edit', as: :edit_custom
       get '/logout/' => 'devise/sessions#destroy', as: :logout
       get '/tweet/:id/like' => 'tweet#like',  as: :tweet_like
       get '/users/:id/follow' => 'relation#follow', as: :user_follow
       get '/timeline/render' => 'user#reload_timeline'
+      post 'tweet/new' => 'tweet#new', as: :tweet_create
     end
   end
 end

@@ -10,6 +10,7 @@
         </div>
         <div id='timeline' class='flex-item-main borders'>
             <h3>Create tweet</h3>
+              <%= render "shared/create_tweet" %>
             <h2>Timeline</h2>
             <div id="renderable_timeline">
               <%= render partial: 'shared/tweets', collection: @tweets, as: :tweet %>
