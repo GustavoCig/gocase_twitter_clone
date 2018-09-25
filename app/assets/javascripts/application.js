@@ -17,7 +17,7 @@
 //= require_tree .
 
 const MAX_FILE_SIZE = 4000;
-const ACCEPTED_FILE_TYPES = ['test', 'test2'];
+const ACCEPTED_FILE_TYPES = ['template1', 'template2'];
 
 let validations = () => {
     let photoUpload = document.getElementById('user_avatar').files
@@ -50,3 +50,14 @@ window.addEventListener('turbolinks:load', () => {
         forms.addEventListener('submit', validations);
     }
 });
+
+$(document).ready(function() {
+  $(document).on("timeline_reload", function() {
+    Rails.ajax({
+      dataType: 'html',
+      type: 'GET',
+      url: "/timeline/render",
+    })
+    });
+  });
+

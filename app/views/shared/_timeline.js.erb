@@ -1,0 +1,2 @@
+$('#renderable_timeline')
+  .replaceWith('<div id="renderable_timeline"><%= j render partial: "shared/tweets", collection: @tweets_reload, as: :tweet %> </div>');

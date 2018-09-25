@@ -10,9 +10,9 @@ module IndexHelper
   def follow_link passed_user
     if !(current_user.id == passed_user.id)
       if current_user.follows? passed_user
-        link_to 'following', user_follow_path(id: passed_user), { id: 'follow-' + passed_user.id.to_s, remote: true }
+        link_to 'following', user_follow_path(id: passed_user), { class: 'test', id: 'follow-' + passed_user.id.to_s, remote: true }
       else
-        link_to 'follow', user_follow_path(id: passed_user), { id: 'follow-' + passed_user.id.to_s, remote: true }
+        link_to 'follow', user_follow_path(id: passed_user), { class: 'test', id: 'follow-' + passed_user.id.to_s, remote: true }
       end
     end
   end

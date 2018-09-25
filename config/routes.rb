@@ -12,6 +12,7 @@ Rails.application.routes.draw do
       get '/logout/' => 'devise/sessions#destroy', as: :logout
       get '/tweet/:id/like' => 'tweet#like',  as: :tweet_like
       get '/users/:id/follow' => 'relation#follow', as: :user_follow
+      get '/timeline/render' => 'user#reload_timeline'
     end
   end
 end

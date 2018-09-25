@@ -1,1 +1,2 @@
 $('#follow-<%= @followed_user.id %>').replaceWith('<%= follow_link @followed_user %>');
+$(document).trigger('timeline_reload');

@@ -11,6 +11,13 @@ class UserController < Devise::RegistrationsController
     @followed_users = User.all
   end
 
+  def reload_timeline
+    @tweets_reload = Tweet.includes(:user)
+                      .where(['(user_id = ?) or (user_id IN (?))', current_user.id, current_user.followed_users.ids])
+                      .limit 10
+    render 'shared/_timeline'
+  end
+
   def new
     super
   end
