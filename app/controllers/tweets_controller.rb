@@ -7,7 +7,7 @@ class TweetsController < ApplicationController
     if @new_tweet.save!
       render 'shared/_timeline'
     else
-      return 'errors'
+      render json:{}, status: :internal_server_error
     end
   end
 end

@@ -14,7 +14,7 @@ Rails.application.routes.draw do
       get '/tweet/:id/like' => 'tweet#like',  as: :tweet_like
       get '/users/:id/follow' => 'relation#follow', as: :user_follow
       get '/timeline/render' => 'user#reload_timeline'
-      post 'tweet/new' => 'tweet#new', as: :tweet_create
+      get '/timeline/loadmore/:page' => 'user#loadmore_timeline'
     end
   end
 end

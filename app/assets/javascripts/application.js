@@ -52,12 +52,28 @@ window.addEventListener('turbolinks:load', () => {
 });
 
 $(document).ready(function() {
-  $(document).on("timeline_reload", function() {
+  $(document).on('timeline_reload', function() {
     Rails.ajax({
       dataType: 'html',
       type: 'GET',
-      url: "/timeline/render",
+      url: '/timeline/render',
     })
-    });
   });
+});
 
+$(document).ready(function() {
+  let page = 1;
+  $(document).scroll(function() {
+    if($(window).scrollTop() == $(document).height() - $(window).height()) {
+     Rails.ajax({
+      dataType: 'html',
+      type: 'GET',
+      url: '/timeline/loadmore/' + page,
+      success: function() {
+        console.log("deu bom");
+        page += 1;
+      }
+     })
+    }
+  });
+});

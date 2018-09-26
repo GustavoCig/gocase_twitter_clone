@@ -14,6 +14,7 @@
             <h2>Timeline</h2>
             <div id="renderable_timeline">
               <%= render partial: 'shared/tweets', collection: @tweets, as: :tweet %>
+              <div id="load-more-content"></div>
             </div>
         </div>
         <div id='options' class='flex-item-tertiary borders'>
