@@ -6,9 +6,8 @@ class UserController < Devise::RegistrationsController
     @tweets = Tweet.includes(:user)
                 .where(['(user_id = ?) or (user_id IN (?))', current_user.id, current_user.followed_users.ids])
                 .limit 10
-    # @followed_users = User.includes(:followed_users)
-    #                     .where id: current_user.followed_users.ids
     @followed_users = User.all
+    @new_tweet = Tweet.new
   end
 
   def reload_timeline
@@ -21,14 +20,24 @@ class UserController < Devise::RegistrationsController
   def loadmore_timeline
     @tweets_reload = Tweet.includes(:user)
                       .where(['(user_id = ?) or (user_id IN (?))', current_user.id, current_user.followed_users.ids])
-                      .limit(10)
-                      .offset 10 * params[:page].to_i
+                      .limit(1)
+                      .offset 1 * params[:page].to_i
     puts @tweets_reload
     if @tweets_reload.empty?
-      render json: {}, status: 416
+      render json: { message: "No more content to be loaded" }, status: 416
     else
       render 'shared/_loadmore_timeline'
     end
+  end
+
+  def timeline_tab
+    @user = current_user
+    @tweets = Tweet.includes(:user)
+                .where(['(user_id = ?) or (user_id IN (?))', current_user.id, current_user.followed_users.ids])
+                .limit 10
+    @followed_users = User.all
+    @new_tweet = Tweet.new
+    render 'shared/_main_timeline'
   end
 
   def new

@@ -1,0 +1,9 @@
+<div id='timeline' class='flex-item-main borders'>
+      <h3>Create tweet</h3>
+        <%= render "shared/create_tweet" %>
+      <h2>Timeline <%= link_to 'Mentions', mentions_path, remote: true %></h2>
+      <div id="renderable_timeline">
+        <%= render partial: 'shared/tweets', collection: @tweets, as: :tweet %>
+    </div>
+  <div id="load-more-content"></div>
+</div>

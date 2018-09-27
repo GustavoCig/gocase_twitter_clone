@@ -10,4 +10,12 @@ class TweetsController < ApplicationController
       render json:{}, status: :internal_server_error
     end
   end
+
+  def destroy
+    deleted_tweet = Tweet.find params[:format]
+    if deleted_tweet.user == current_user
+      deleted_tweet.destroy
+      redirect_to reload_timeline_url
+    end
+  end
 end

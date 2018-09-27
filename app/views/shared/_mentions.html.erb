@@ -1,0 +1,6 @@
+<div id='timeline' class='flex-item-main borders'>
+  <div id="mentions">
+    <h2><%= link_to 'Timeline', timeline_path, remote: true %> Mentions</h2>
+    <%= render partial: 'shared/tweets', collection: @mentioned_tweets, as: :tweet  %>
+  </div>
+</div>

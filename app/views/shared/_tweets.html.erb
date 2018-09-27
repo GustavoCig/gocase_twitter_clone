@@ -1,7 +1,7 @@
 <div class='tweet'>
   <table>
     <tr>
-      <td>ID: <%= tweet.id %></td>
+      <td>ID: <%= tweet.id %> <%= link_to 'delete', tweets_path(tweet), method: :delete, remote: true %></td>
     </tr>
     <tr>
       <td id="<%= tweet.id %>">User:<%= tweet.user.username %></td>

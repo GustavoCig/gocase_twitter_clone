@@ -70,7 +70,6 @@ $(document).ready(function() {
       type: 'GET',
       url: '/timeline/loadmore/' + page,
       success: function() {
-        console.log("deu bom");
         page += 1;
       }
      })
