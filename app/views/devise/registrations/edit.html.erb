@@ -5,16 +5,37 @@
 
 
   <div class="field">
-    <%= f.label :avatar %>
-    <% if current_user.avatar.attached? %>
-          <%= image_tag current_user.avatar %>
-    <% end %>
-    <%= f.file_field :avatar %>
+  <table>
+    <tr>
+      <td>
+        <%= f.label :avatar %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <% if current_user.avatar.attached? %>
+          <%= image_tag passed_user.avatar %> 
+        <% else %>
+          <%= image_tag 'picture_min.png' %>
+        <% end %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <%= f.file_field :avatar, accept: 'image/png,image/jpeg' %>
+      </td>
+    </tr>
+  </table>
   </div>
 
   <div class="field">
     <%= f.label :name %><br />
     <%= f.text_field :name, autofocus: true %>
+  </div>
+
+  <div id="field">
+    <%= f.label :username %></br>
+    <%= f.text_field :username %>
   </div>
 
   <div class="field">

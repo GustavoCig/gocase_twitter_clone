@@ -16,7 +16,7 @@
 //= require jquery
 //= require_tree .
 
-const MAX_FILE_SIZE = 4000;
+const MAX_FILE_SIZE = 40000;
 const ACCEPTED_FILE_TYPES = ['template1', 'template2'];
 
 let validations = () => {

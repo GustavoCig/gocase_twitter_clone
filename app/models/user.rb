@@ -30,6 +30,7 @@ class User < ApplicationRecord
   validates :username, length: { minimum: 2, maximum: 30},
               format: { with: /\A[a-zA-Z0-9]{1,30}\z/,
               message: 'Invalid username used' }
+  validates_with AvatarShouldBeAnImage
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable

@@ -56,8 +56,7 @@ class UserController < Devise::RegistrationsController
 
   # PUT /resource
    def update
-     super
-     puts params[:user][:avatar]
+    super
    end
 
   # DELETE /resource
@@ -78,7 +77,7 @@ class UserController < Devise::RegistrationsController
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_params
-    devise_parameter_sanitizer.permit :sign_up, keys: [:name, :username, :email, :password, :password_confirmation]
-    devise_parameter_sanitizer.permit :account_update, keys: [:avatar, :name, :email, :password, :password_confirmation]
+    devise_parameter_sanitizer.permit :sign_up, keys: [:avatar, :name, :username, :email, :password, :password_confirmation]
+    devise_parameter_sanitizer.permit :account_update, keys: [:avatar, :name, :username, :email, :password, :password_confirmation]
   end
 end
